@@ -41,3 +41,8 @@ Thumbs.db
 
 # Local overrides
 *.local
+
+# Documentation & internal specifications
+docs/
+ANTIGRAVITY_GUIDE.md
+GEMINI.md
