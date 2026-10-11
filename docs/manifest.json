@@ -1,0 +1,23 @@
+{
+  "project": "SmartGate",
+  "version": "1.0.0",
+  "purpose": "Software engineering documentation pack for Antigravity IDE",
+  "documents": [
+    "README.md",
+    "PROJECT_CHARTER.md",
+    "PRD.md",
+    "SRS.md",
+    "ARCHITECTURE.md",
+    "DATABASE_DESIGN.md",
+    "WORKFLOWS.md",
+    "API_CONTRACTS.md",
+    "UI_UX_DESIGN.md",
+    "SECURITY_THREAT_MODEL.md",
+    "TEST_PLAN.md",
+    "IMPLEMENTATION_PLAN.md",
+    "ANTIGRAVITY_GUIDE.md",
+    "GEMINI.md",
+    "DECISIONS.md",
+    "GLOSSARY.md"
+  ]
+}

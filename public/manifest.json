@@ -1,0 +1,17 @@
+{
+  "name": "SmartGate — College Gate Pass Management",
+  "short_name": "SmartGate",
+  "description": "Secure college gate-pass and student exit/return management system",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
