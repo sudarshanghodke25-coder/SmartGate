@@ -24,10 +24,8 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({
     (r) => r.studentId === user.id || r.studentRollNo === user.rollNo,
   )
 
-  // Find currently active approved pass (approved and either no_exit or exited)
-  const activePass = studentRequests.find(
-    (r) => r.status === 'approved' || (r.status === 'completed' && false),
-  )
+  // Find currently active approved pass
+  const activePass = studentRequests.find((r) => r.status === 'approved')
 
   const pendingCount = studentRequests.filter((r) => r.status === 'pending').length
   const completedCount = studentRequests.filter((r) => r.status === 'completed').length

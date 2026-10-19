@@ -1,19 +1,46 @@
 # Dependencies
 node_modules
+/.pnp
+.pnp.js
 
-# Build output
+# Production build artifacts
 dist
 dist-ssr
+*.local
 
-# Environment variables (NEVER commit secrets)
+# Environment & Sensitive Credentials (NEVER commit secrets or API keys)
 .env
-.env.local
-.env.*.local
+.env.*
+!.env.example
 
-# Supabase local
+# Supabase local state & secrets
 .supabase
 
-# Logs
+# Editor & IDE configurations
+.vscode/*
+!.vscode/extensions.json
+.vscode/mcp.json
+.idea/
+.cursor/
+.claude/
+.agents/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.swo
+
+# OS metadata
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs & debugging
 logs
 *.log
 npm-debug.log*
@@ -22,27 +49,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# OS files
-.DS_Store
-Thumbs.db
-
-# TypeScript build info
+# TypeScript cache
 *.tsbuildinfo
 
-# Local overrides
-*.local
-
-# Documentation & internal specifications
+# AI Agents, Prompts & Internal Specifications
 docs/
 ANTIGRAVITY_GUIDE.md
 GEMINI.md

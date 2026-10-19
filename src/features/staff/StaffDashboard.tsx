@@ -18,10 +18,8 @@ export const StaffDashboard: React.FC<StaffDashboardProps> = ({ user, requests, 
     type: 'approve' | 'reject'
   } | null>(null)
 
-  // Scope to staff department or show all for faculty
-  const deptRequests = requests.filter(
-    (r) => !user.department || r.department === user.department || true,
-  )
+  // Scope to staff department, or all requests if user has campus-wide purview
+  const deptRequests = requests.filter((r) => !user.department || r.department === user.department)
 
   const pendingRequests = deptRequests.filter((r) => r.status === 'pending')
   const approvedCount = deptRequests.filter(

@@ -340,8 +340,8 @@ export const AppShell = () => {
 
       {/* Toast Alert Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 animate-bounce">
-          <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-slate-900 border border-blue-500/40 text-blue-200 text-xs shadow-2xl">
+        <div className="fixed bottom-6 right-6 z-50 transition-all duration-300 ease-out">
+          <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-slate-900/95 backdrop-blur-md border border-blue-500/40 text-blue-200 text-xs shadow-2xl ring-1 ring-blue-500/20">
             <Sparkles size={16} className="text-blue-400 shrink-0" />
             <span className="font-medium">{toastMessage}</span>
           </div>
