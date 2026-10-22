@@ -6,20 +6,30 @@ import {
   Ban,
   ArrowRightCircle,
   RotateCcw,
+  AlertTriangle,
+  Flame,
 } from 'lucide-react'
-import type { PassStatus, GateEventState } from '../types'
+import type { PassStatus, GateEventState, PassPriority } from '../types'
 
 interface StatusBadgeProps {
   status: PassStatus
   gateState?: GateEventState
+  isOverdue?: boolean
+  priority?: PassPriority
   size?: 'sm' | 'md' | 'lg'
 }
 
-export const StatusBadge = ({ status, gateState, size = 'md' }: StatusBadgeProps) => {
+export const StatusBadge = ({
+  status,
+  gateState,
+  isOverdue,
+  priority,
+  size = 'md',
+}: StatusBadgeProps) => {
   const sizeClasses = {
-    sm: 'px-2 py-0.5 text-xs gap-1',
-    md: 'px-2.5 py-1 text-xs font-semibold gap-1.5',
-    lg: 'px-3 py-1.5 text-sm font-semibold gap-2',
+    sm: 'text-[11px] gap-1',
+    md: 'text-xs font-semibold gap-1.5',
+    lg: 'text-sm font-semibold gap-2',
   }
 
   const iconSizes = {
@@ -30,14 +40,24 @@ export const StatusBadge = ({ status, gateState, size = 'md' }: StatusBadgeProps
 
   const iconSize = iconSizes[size]
 
-  // If pass is approved, gateState provides critical gate transition clarity
+  if (status === 'approved' && gateState === 'exited' && isOverdue) {
+    return (
+      <span
+        className={`inline-flex items-center font-semibold text-rose-600 dark:text-rose-400 whitespace-nowrap shrink-0 ${sizeClasses[size]}`}
+      >
+        <AlertTriangle size={iconSize} className="text-rose-600 dark:text-rose-400 shrink-0" />
+        <span>Overdue Off-Campus</span>
+      </span>
+    )
+  }
+
   if (status === 'approved' && gateState === 'exited') {
     return (
       <span
-        className={`inline-flex items-center rounded-full bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-500/30 ${sizeClasses[size]}`}
+        className={`inline-flex items-center font-semibold text-indigo-700 dark:text-indigo-300 whitespace-nowrap shrink-0 ${sizeClasses[size]}`}
       >
-        <ArrowRightCircle size={iconSize} className="text-indigo-400" />
-        <span>Exited (Off Campus)</span>
+        <ArrowRightCircle size={iconSize} className="text-indigo-600 dark:text-indigo-400 shrink-0" />
+        <span>Exited · Off Campus</span>
       </span>
     )
   }
@@ -46,49 +66,57 @@ export const StatusBadge = ({ status, gateState, size = 'md' }: StatusBadgeProps
     case 'pending':
       return (
         <span
-          className={`inline-flex items-center rounded-full bg-amber-500/15 text-amber-300 ring-1 ring-amber-500/30 ${sizeClasses[size]}`}
+          className={`inline-flex items-center font-semibold whitespace-nowrap shrink-0 ${
+            priority === 'emergency'
+              ? 'text-rose-600 dark:text-rose-300'
+              : 'text-amber-700 dark:text-amber-300'
+          } ${sizeClasses[size]}`}
         >
-          <Clock size={iconSize} className="text-amber-400" />
-          <span>Pending Staff Review</span>
+          {priority === 'emergency' ? (
+            <Flame size={iconSize} className="text-rose-600 dark:text-rose-400 shrink-0" />
+          ) : (
+            <Clock size={iconSize} className="text-amber-600 dark:text-amber-400 shrink-0" />
+          )}
+          <span>{priority === 'emergency' ? 'Urgent SOS · Pending' : 'Pending Faculty Review'}</span>
         </span>
       )
 
     case 'approved':
       return (
         <span
-          className={`inline-flex items-center rounded-full bg-emerald-500/15 text-emerald-300 ring-1 ring-emerald-500/30 ${sizeClasses[size]}`}
+          className={`inline-flex items-center font-semibold text-emerald-700 dark:text-emerald-300 whitespace-nowrap shrink-0 ${sizeClasses[size]}`}
         >
-          <CheckCircle2 size={iconSize} className="text-emerald-400" />
-          <span>Approved (Ready for Gate)</span>
+          <CheckCircle2 size={iconSize} className="text-emerald-600 dark:text-emerald-400 shrink-0" />
+          <span>Approved · Ready at Gate</span>
         </span>
       )
 
     case 'completed':
       return (
         <span
-          className={`inline-flex items-center rounded-full bg-blue-500/15 text-blue-300 ring-1 ring-blue-500/30 ${sizeClasses[size]}`}
+          className={`inline-flex items-center font-semibold text-blue-700 dark:text-blue-300 whitespace-nowrap shrink-0 ${sizeClasses[size]}`}
         >
-          <RotateCcw size={iconSize} className="text-blue-400" />
-          <span>Completed (Returned)</span>
+          <RotateCcw size={iconSize} className="text-blue-600 dark:text-blue-400 shrink-0" />
+          <span>Completed · Returned</span>
         </span>
       )
 
     case 'rejected':
       return (
         <span
-          className={`inline-flex items-center rounded-full bg-rose-500/15 text-rose-300 ring-1 ring-rose-500/30 ${sizeClasses[size]}`}
+          className={`inline-flex items-center font-semibold text-rose-700 dark:text-rose-300 whitespace-nowrap shrink-0 ${sizeClasses[size]}`}
         >
-          <XCircle size={iconSize} className="text-rose-400" />
-          <span>Rejected by Staff</span>
+          <XCircle size={iconSize} className="text-rose-600 dark:text-rose-400 shrink-0" />
+          <span>Declined by Faculty</span>
         </span>
       )
 
     case 'expired':
       return (
         <span
-          className={`inline-flex items-center rounded-full bg-slate-500/15 text-slate-400 ring-1 ring-slate-500/30 ${sizeClasses[size]}`}
+          className={`inline-flex items-center font-semibold text-slate-500 dark:text-slate-400 whitespace-nowrap shrink-0 ${sizeClasses[size]}`}
         >
-          <AlertCircle size={iconSize} className="text-slate-400" />
+          <AlertCircle size={iconSize} className="text-slate-500 dark:text-slate-400 shrink-0" />
           <span>Expired</span>
         </span>
       )
@@ -96,9 +124,9 @@ export const StatusBadge = ({ status, gateState, size = 'md' }: StatusBadgeProps
     case 'cancelled':
       return (
         <span
-          className={`inline-flex items-center rounded-full bg-zinc-500/15 text-zinc-400 ring-1 ring-zinc-500/30 ${sizeClasses[size]}`}
+          className={`inline-flex items-center font-semibold text-slate-500 dark:text-slate-400 whitespace-nowrap shrink-0 ${sizeClasses[size]}`}
         >
-          <Ban size={iconSize} className="text-zinc-400" />
+          <Ban size={iconSize} className="text-slate-500 shrink-0" />
           <span>Cancelled</span>
         </span>
       )

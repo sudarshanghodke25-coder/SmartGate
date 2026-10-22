@@ -1,0 +1,7 @@
+{
+  "name": "Remix Updated Version",
+  "description": "Imported from GitHub: sudarshanghodke25-coder/SmartGate",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
